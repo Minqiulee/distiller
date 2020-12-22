@@ -43,6 +43,7 @@ from .ranked_structures_pruner import L1RankedStructureParameterPruner, \
 from .baidu_rnn_pruner import BaiduRNNPruner
 from .greedy_filter_pruning import greedy_pruner
 from .compensation import CompensatePrunner
+from .similarity import *
 import torch
 import torch.nn as nn
 
@@ -155,25 +156,7 @@ def create_mask_similarity_criterion(tensor, threshold, bn_lambda):
         redirect tensor, having the same size as the input tensor. 0 for nothing changed,
         otherwise the value is the index of its most similar coefficient.
     """
-
-def similarity_criterion_most_similar(tensor, threshold, bn_lambda):
-    """Calculate similarity for creat_mask_similarity_criterion().
-
-    Features with exactly same value have different direction after batch normalization layer.
-    Similarity in different kind of layers are calculated respectively. Relationship between
-    masked and non-masked coefficients are represented as redirection tensor.
-    Args:
-        tensor - tensor masked based on sensitivity criterion.
-        threshold - a floating-point threshold value betwee 0 and 1. Enumerate masked
-            coefficients and find a most similar coefficient that is kept based on cosine
-            similarity. Then if the similiarity is larger or equal to the threshold, masked
-            coefficients will be recovered and redirected to its similar coefficient.
-        bn_lambda - a floating-point value specifying how much should differences on bias be
-            considered while calculating similiarity.
-    Returns:
-        redirect tensor, having the same size as the input tensor. 0 for nothing changed,
-        otherwise the value is the index of its most similar coefficient.
-    """
     # similarity is defined differently in batch normalization layer
-    pass
+    most_similar()
+    return mask
 

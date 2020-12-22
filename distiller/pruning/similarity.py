@@ -1,3 +1,7 @@
+import distiller
+import torch
+import torch.nn as nn
+
 def most_similar(weights_column: torch.Tensor, neurons: torch.Tensor) -> Tuple(torch.Tensor, float, float):
     neurons_T = neurons.transpose(0, 1)
     cos = nn.CosineSimilarity(0)
@@ -8,10 +12,8 @@ def most_similar(weights_column: torch.Tensor, neurons: torch.Tensor) -> Tuple(t
 
     return neurons_T[max_neuron_index], max_similarity, scale
 
-
 def get_important_weights(layer_name: str, parameter_dict: Dict[str, torch.Tensor]) -> torch.Tensor:
     return parameter_dict['weight']
-
 
 def decompose(original_weights: torch.Tensor, important_weights: torch.Tensor, threshould: float) -> torch.Tensor:
     """
