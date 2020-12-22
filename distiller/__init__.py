@@ -29,6 +29,7 @@ from .thinning import *
 from .knowledge_distillation import KnowledgeDistillationPolicy, DistillationLossWeights
 from .summary_graph import SummaryGraph, onnx_name_2_pytorch_name
 from .early_exit import EarlyExitMgr
+from .similarity import *
 import pkg_resources
 import logging
 logging.captureWarnings(True)
